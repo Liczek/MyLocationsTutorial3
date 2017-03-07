@@ -105,6 +105,15 @@ class CurentLocationViewController: UIViewController, CLLocationManagerDelegate 
                 geocoder.reverseGeocodeLocation(newLocation, completionHandler: {
                     placemarks, error in
                     print("*** Found placemarks: \(placemarks), error: \(error)")
+                    
+                    self.lastGeocodingError = error
+                    if error == nil, let p = placemarks, !p.isEmpty {
+                        self.placemark = p.last
+                    } else {
+                        self.placemark = nil
+                    }
+                    self.performingReverseGeocoding = false
+                    self.updateLabels()
                 })
                 
             }
@@ -130,6 +139,16 @@ class CurentLocationViewController: UIViewController, CLLocationManagerDelegate 
             longitudeLabel.text = String(format: "%.8f", location.coordinate.longitude)
             tagButton.isHidden = false
             messageLabel.text = "Your location"
+            
+            if let placemark = placemark  {
+                addressLabel.text = string(from: placemark)
+            } else if performingReverseGeocoding {
+                addressLabel.text = "Searching for Address..."
+            } else if lastGeocodingError != nil {
+                addressLabel.text = "Error Finding Address"
+            } else {
+                addressLabel.text = "No Address Found"
+            }
         } else {
             latitudeLabel.text = ""
             longitudeLabel.text = ""
