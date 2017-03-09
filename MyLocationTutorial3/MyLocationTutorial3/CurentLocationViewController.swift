@@ -163,7 +163,7 @@ class CurentLocationViewController: UIViewController, CLLocationManagerDelegate 
             messageLabel.text = "Your location"
             
             if let placemark = placemark  {
-                addressLabel.text = string(from: placemark)
+                addressLabel.text = CurentLocationViewController.string(from: placemark)
             } else if performingReverseGeocoding {
                 addressLabel.text = "Searching for Address..."
             } else if lastGeocodingError != nil {
@@ -229,7 +229,7 @@ class CurentLocationViewController: UIViewController, CLLocationManagerDelegate 
         }
     }
     
-    func string(from placemark: CLPlacemark) -> String {
+    static func string(from placemark: CLPlacemark) -> String {
         var line1 = ""
         if let s = placemark.subThoroughfare {
             line1 += s + " "
@@ -249,7 +249,12 @@ class CurentLocationViewController: UIViewController, CLLocationManagerDelegate 
             line2 += s
         }
         
-        return line1 + "\n" + line2
+        var line3 = ""
+        if let s = placemark.country {
+            line3 += s
+        }
+        
+        return line1 + "\n" + line2 + "\n" + line3
     }
     
     func didTimeOut() {
@@ -262,6 +267,18 @@ class CurentLocationViewController: UIViewController, CLLocationManagerDelegate 
             
             updateLabels()
             configureGetButton()
+        }
+    }
+    
+//MARK: - SEGUE
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "TagLocation" {
+            let navigationController = segue.destination as! UINavigationController
+            let controller = navigationController.topViewController as! LocationDetailsViewController
+            
+            controller.coordinate = location!.coordinate
+            controller.placemark = placemark
         }
     }
 
