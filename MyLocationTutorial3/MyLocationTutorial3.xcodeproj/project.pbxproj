@@ -14,6 +14,7 @@
 		C8205CCA1E6C4CA100AC157A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8205CC91E6C4CA100AC157A /* Assets.xcassets */; };
 		C8205CCD1E6C4CA100AC157A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8205CCB1E6C4CA100AC157A /* LaunchScreen.storyboard */; };
 		C8606D711E71F05000245143 /* LocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8606D701E71F05000245143 /* LocationDetailsViewController.swift */; };
+		C86CEE8D1E73184600C779FC /* CategoryPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86CEE8C1E73184600C779FC /* CategoryPickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		C8205CCC1E6C4CA100AC157A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C8205CCE1E6C4CA100AC157A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8606D701E71F05000245143 /* LocationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDetailsViewController.swift; sourceTree = "<group>"; };
+		C86CEE8C1E73184600C779FC /* CategoryPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryPickerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				C8205CC01E6C4CA100AC157A /* AppDelegate.swift */,
 				C8205CC21E6C4CA100AC157A /* CurentLocationViewController.swift */,
 				C8606D701E71F05000245143 /* LocationDetailsViewController.swift */,
+				C86CEE8C1E73184600C779FC /* CategoryPickerViewController.swift */,
 				C8205CC41E6C4CA100AC157A /* SecondViewController.swift */,
 				C8205CC61E6C4CA100AC157A /* Main.storyboard */,
 				C8205CC91E6C4CA100AC157A /* Assets.xcassets */,
@@ -146,6 +149,7 @@
 				C8606D711E71F05000245143 /* LocationDetailsViewController.swift in Sources */,
 				C8205CC51E6C4CA100AC157A /* SecondViewController.swift in Sources */,
 				C8205CC11E6C4CA100AC157A /* AppDelegate.swift in Sources */,
+				C86CEE8D1E73184600C779FC /* CategoryPickerViewController.swift in Sources */,
 				C8205CC31E6C4CA100AC157A /* CurentLocationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
