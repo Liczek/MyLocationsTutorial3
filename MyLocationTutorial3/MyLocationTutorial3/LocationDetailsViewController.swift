@@ -42,7 +42,17 @@ class LocationDetailsViewController: UITableViewController {
     }
     
     @IBAction func done() {
-        dismiss(animated: true, completion: nil)
+        let hudView = HudView.hud(inView: navigationController!.view, animated: true)
+        
+        hudView.text = "Tagged"
+        
+//        afterDelay(0.8, closure: {
+//            self.dismiss(animated: true, completion: nil)
+//        })
+        
+        afterDelay(0.7) {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
 //MARK: - UNWIND SEGUE (Orange Exit)
