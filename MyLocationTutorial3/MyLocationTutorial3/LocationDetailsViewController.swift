@@ -29,6 +29,8 @@ class LocationDetailsViewController: UITableViewController {
     
     var managedObjectContext: NSManagedObjectContext!
     
+    var date = Date()
+    
 //MARK: - OUTLETS
     
     @IBOutlet weak var descriptionTextView: UITextView!
@@ -49,12 +51,23 @@ class LocationDetailsViewController: UITableViewController {
         
         hudView.text = "Tagged"
         
-//        afterDelay(0.8, closure: {
-//            self.dismiss(animated: true, completion: nil)
-//        })
+        let location = Location(context: managedObjectContext)
+        
+        location.locationDescription = descriptionTextView.text
+        location.category = categoryName
+        location.latitude = coordinate.latitude
+        location.longitude = coordinate.longitude
+        location.date = date
+        location.placemark = placemark
+        
+        do {
+            try managedObjectContext.save()       
         
         afterDelay(0.7) {
             self.dismiss(animated: true, completion: nil)
+            }
+        } catch {
+            fatalCoreDataError(error)
         }
     }
     
@@ -83,7 +96,7 @@ class LocationDetailsViewController: UITableViewController {
             addressLabel.text = "No Address Found"
         }
         
-        dateLabel.text = format(date: Date())
+        dateLabel.text = format(date: date)
         
         // keyboard dissmis after you enter to TextView and tap out of it
         
