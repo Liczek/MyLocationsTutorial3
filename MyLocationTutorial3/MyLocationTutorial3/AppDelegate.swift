@@ -23,6 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let tabBarViewControllers = tabBarController.viewControllers {
             let curentLocationViewController = tabBarViewControllers[0] as! CurentLocationViewController
             
+            let navigationController = tabBarViewControllers[1] as! UINavigationController
+            let locationsViewController = navigationController.viewControllers[0] as! LocationsViewController
+            
+            locationsViewController.managedObjectContext = managedObjectContext
             curentLocationViewController.managedObjectContext = managedObjectContext
         }
         print(applicationDocumentsDirectory)
