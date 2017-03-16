@@ -22,13 +22,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let tabBarViewControllers = tabBarController.viewControllers {
             let curentLocationViewController = tabBarViewControllers[0] as! CurentLocationViewController
+            curentLocationViewController.managedObjectContext = managedObjectContext
             
             let navigationController = tabBarViewControllers[1] as! UINavigationController
             let locationsViewController = navigationController.viewControllers[0] as! LocationsViewController
-            
             locationsViewController.managedObjectContext = managedObjectContext
             let _ = locationsViewController.view
-            curentLocationViewController.managedObjectContext = managedObjectContext
+
+            let mapViewController = tabBarViewControllers[2] as! MapViewController
+            mapViewController.managedObjectContext = managedObjectContext
+            
+            
         }
         print(applicationDocumentsDirectory)
         listenForFatalCoreDataNotifications()
