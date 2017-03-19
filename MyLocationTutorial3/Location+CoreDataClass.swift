@@ -10,13 +10,13 @@ import Foundation
 import CoreData
 import MapKit
 
-public class Location: NSManagedObject, MKAnnotation {
+class Location: NSManagedObject, MKAnnotation {
 
-    public var coordinate: CLLocationCoordinate2D {
+    var coordinate: CLLocationCoordinate2D {
         return CLLocationCoordinate2DMake(latitude, longitude)
     }
     
-    public var title: String? {
+    var title: String? {
         if locationDescription.isEmpty {
             return "(No Description)"
         } else {
@@ -24,7 +24,7 @@ public class Location: NSManagedObject, MKAnnotation {
         }
     }
     
-    public var subtitle: String? {
+    var subtitle: String? {
         return category
     }
     
