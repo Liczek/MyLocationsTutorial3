@@ -167,7 +167,7 @@ class CurentLocationViewController: UIViewController, CLLocationManagerDelegate 
             messageLabel.text = "Your location"
             
             if let placemark = placemark  {
-                addressLabel.text = CurentLocationViewController.string(from: placemark)
+                addressLabel.text = string(from: placemark)
             } else if performingReverseGeocoding {
                 addressLabel.text = "Searching for Address..."
             } else if lastGeocodingError != nil {
@@ -233,32 +233,46 @@ class CurentLocationViewController: UIViewController, CLLocationManagerDelegate 
         }
     }
     
-    static func string(from placemark: CLPlacemark) -> String {
+//    static func string(from placemark: CLPlacemark) -> String {
+//        var line1 = ""
+//        if let s = placemark.subThoroughfare {
+//            line1 += s + " "
+//        }
+//        if let s = placemark.thoroughfare {
+//            line1 += s
+//        }
+//        
+//        var line2 = ""
+//        if let s = placemark.locality {
+//            line2 += s + " "
+//        }
+//        if let s = placemark.administrativeArea {
+//            line2 += s + " "
+//        }
+//        if let s = placemark.postalCode {
+//            line2 += s
+//        }
+//        
+//        var line3 = ""
+//        if let s = placemark.country {
+//            line3 += s
+//        }
+//        
+//        return line1 + "\n" + line2 + "\n" + line3
+//    }
+    
+    func string(from placemark: CLPlacemark) -> String {
         var line1 = ""
-        if let s = placemark.subThoroughfare {
-            line1 += s + " "
-        }
-        if let s = placemark.thoroughfare {
-            line1 += s
-        }
+        line1.add(text: placemark.subThoroughfare)
+        line1.add(text: placemark.thoroughfare, separatedBy: " ")
         
         var line2 = ""
-        if let s = placemark.locality {
-            line2 += s + " "
-        }
-        if let s = placemark.administrativeArea {
-            line2 += s + " "
-        }
-        if let s = placemark.postalCode {
-            line2 += s
-        }
+        line2.add(text: placemark.locality)
+        line2.add(text: placemark.administrativeArea, separatedBy: " ")
+        line2.add(text: placemark.postalCode, separatedBy: " ")
         
-        var line3 = ""
-        if let s = placemark.country {
-            line3 += s
-        }
-        
-        return line1 + "\n" + line2 + "\n" + line3
+        line1.add(text: line2, separatedBy: "\n")
+        return line1
     }
     
     func didTimeOut() {

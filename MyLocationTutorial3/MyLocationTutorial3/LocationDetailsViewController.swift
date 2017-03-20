@@ -146,7 +146,7 @@ class LocationDetailsViewController: UITableViewController {
         longitudeLabel.text = "\(coordinate.longitude)"
         
         if let placemark = placemark {
-            addressLabel.text = CurentLocationViewController.string(from: placemark)
+            addressLabel.text = string(from: placemark)
         } else {
             addressLabel.text = "No Address Found"
         }
@@ -259,6 +259,17 @@ class LocationDetailsViewController: UITableViewController {
             strongSelf.descriptionTextView.resignFirstResponder()
             }
         }
+    }
+    
+    func string(from placemark: CLPlacemark) -> String {
+        var line = ""
+        line.add(text: placemark.subThoroughfare)
+        line.add(text: placemark.thoroughfare, separatedBy: " ")
+        line.add(text: placemark.locality, separatedBy: ", ")
+        line.add(text: placemark.administrativeArea, separatedBy: ", ")
+        line.add(text: placemark.postalCode, separatedBy: " ")
+        line.add(text: placemark.country, separatedBy: ", ")
+        return line
     }
     
     deinit {
