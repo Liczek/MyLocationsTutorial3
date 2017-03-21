@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import CoreData
 import QuartzCore
+import AudioToolbox
 
 class CurentLocationViewController: UIViewController, CLLocationManagerDelegate, CAAnimationDelegate {
     
@@ -39,6 +40,8 @@ class CurentLocationViewController: UIViewController, CLLocationManagerDelegate,
        
         return button
     }()
+    
+    var soundID: SystemSoundID = 0
 
     
 //MARK: - Outlets
@@ -149,6 +152,11 @@ class CurentLocationViewController: UIViewController, CLLocationManagerDelegate,
                     
                     self.lastGeocodingError = error
                     if error == nil, let p = placemarks, !p.isEmpty {
+                        
+                        if self.placemark == nil {
+                            print("FIRST TIME!")
+                            self.playSoundEffect()
+                        }
                         self.placemark = p.last
                     } else {
                         self.placemark = nil
@@ -391,6 +399,27 @@ class CurentLocationViewController: UIViewController, CLLocationManagerDelegate,
         logoButton.removeFromSuperview()
     }
     
+//MARK: - Sound Effect
+    
+    func loadSoundEffect(_ name: String) {
+        if let path = Bundle.main.path(forResource: name, ofType: nil) {
+            let fileURL = URL(fileURLWithPath: path, isDirectory: false)
+            let error = AudioServicesCreateSystemSoundID(fileURL as CFURL, &soundID)
+            if error != kAudioServicesNoError {
+                print("Error code \(error) loading sound at path: \(path)")
+            }
+        }
+    }
+    
+    func unloadSoundEffect() {
+        AudioServicesDisposeSystemSoundID(soundID)
+        soundID = 0
+    }
+    
+    func playSoundEffect() {
+        AudioServicesPlaySystemSound(soundID)
+    }
+    
 //MARK: - SEGUE
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -410,6 +439,7 @@ class CurentLocationViewController: UIViewController, CLLocationManagerDelegate,
         super.viewDidLoad()
         updateLabels()
         configureGetButton()
+        loadSoundEffect("Sound.caf")
     }
 
     override func didReceiveMemoryWarning() {
