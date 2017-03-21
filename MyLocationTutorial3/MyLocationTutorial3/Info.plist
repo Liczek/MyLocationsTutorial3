@@ -23,7 +23,9 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app lets you keep track of interesting places. It needs access to the GPS coordinates for your location.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Add ohotos to your locations</string>
+	<string>Add photos to your locations</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Let you take a photo</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
