@@ -167,7 +167,7 @@ class CurentLocationViewController: UIViewController, CLLocationManagerDelegate,
                 
             } else if distance < 1 {
                 let timeInterval = newLocation.timestamp.timeIntervalSince(location!.timestamp)
-                if timeInterval > 30 {
+                if timeInterval > 15 {
                     //print("*** Force done!")
                     stopLocationManager()
                     updateLabels()
@@ -281,6 +281,7 @@ class CurentLocationViewController: UIViewController, CLLocationManagerDelegate,
             
             if let spinner = view.viewWithTag(spinnerTag) {
                 spinner.removeFromSuperview()
+                playSoundEffect()
             }
         }
     }
