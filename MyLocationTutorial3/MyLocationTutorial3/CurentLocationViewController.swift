@@ -159,7 +159,7 @@ class CurentLocationViewController: UIViewController, CLLocationManagerDelegate,
                 
             } else if distance < 1 {
                 let timeInterval = newLocation.timestamp.timeIntervalSince(location!.timestamp)
-                if timeInterval > 10 {
+                if timeInterval > 30 {
                     //print("*** Force done!")
                     stopLocationManager()
                     updateLabels()
@@ -254,10 +254,26 @@ class CurentLocationViewController: UIViewController, CLLocationManagerDelegate,
     }
     
     func configureGetButton() {
+        
+        let spinnerTag = 1001
+        
         if updatingLocation {
             getButton.setTitle("Stop", for: .normal)
+            
+            if view.viewWithTag(spinnerTag) == nil {
+                let spinner = UIActivityIndicatorView(activityIndicatorStyle: .white)
+                spinner.center = messageLabel.center
+                spinner.center.y += spinner.bounds.size.height / 2 + 15
+                spinner.startAnimating()
+                spinner.tag = spinnerTag
+                containerView.addSubview(spinner)
+            }
         } else {
             getButton.setTitle("Get My Location", for: .normal)
+            
+            if let spinner = view.viewWithTag(spinnerTag) {
+                spinner.removeFromSuperview()
+            }
         }
     }
     
